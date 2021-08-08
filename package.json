@@ -1,0 +1,8 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/douglasmatosdev/weather.git",
+  "author": "douglasmatosdev <douglasmatosdev@gmail.com>",
+  "license": "MIT"
+}
