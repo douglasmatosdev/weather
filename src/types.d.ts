@@ -21,7 +21,7 @@ export type Sys = {
     id: number
     sunrise: number
     sunset: number
-    export type: number
+    type: number
 }
 
 export type Weather = {
@@ -34,6 +34,17 @@ export type Weather = {
 export type Wind = {
     deg: number
     speed: number
+}
+
+type City = {
+    coord: Coord
+    country: string
+    id: number
+    name: string
+    population: number
+    sunrise: number
+    sunset: number
+    timezone: number
 }
 
 export interface ResponseConsult {
@@ -50,4 +61,24 @@ export interface ResponseConsult {
     visibility: number
     weather: Weather
     wind: Wind
+}
+
+export interface ListForecast {
+    clouds: Clouds
+    dt: number
+    dt_txt: string
+    main: Main & { grnd_level: number; sea_level: number; temp_kf: number; }
+    pop: number
+    sys: { prod: number }
+    visibility: number
+    weather: Weather
+    wind: Wind & { gust: number }
+}
+
+export interface ResponseConsultForecast {
+    city: City
+    cnt: number
+    cod: string
+    list: ListForecast[]
+    massage: 0
 }
