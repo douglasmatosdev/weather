@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconContext } from 'react-icons'
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
+import { FaTimes } from 'react-icons/fa'
 import { ListForecast, Main, Sys, Weather, Wind } from '../../types'
 
 interface Props {
@@ -13,11 +14,17 @@ interface Props {
     forecast: ListForecast[] | null
 }
 
-export default function Card({ name, main, weather, wind, sys, forecast }: Props): JSX.Element {
-    console.log(forecast)
-    return (
+export default function Card({ name, main, weather, wind, sys, forecast }: Props){
+    const [close, setClose] = React.useState(false)
+
+    return !close && (
         <CardContainer>
             <div className="card__header">
+                <div className="icon-close" onClick={() => setClose(!close)}>
+                    <IconContext.Provider value={{ size: '24px', color: 'orange', className: 'global-class-name' }}>
+                        <FaTimes />
+                    </IconContext.Provider>
+                </div>
                 <h3>{name || 'Rio de Janeiro'} - {sys?.country || 'BR'}</h3>
                 <h1>{main?.temp.toFixed(0) || 25}°C {weather && weather[0]?.description || 'Nublado'}</h1>
                 <div className="card__box">
@@ -71,7 +78,12 @@ export default function Card({ name, main, weather, wind, sys, forecast }: Props
 }
 
 const CardContainer = styled.div`
+    .card__header .icon-close {
+        position: absolute;
+        right: 24px;
+    }
     .card__header {
+        position: relative;
         padding: 16px;
         background-color: #FDF2E4;
         width: 100%;
