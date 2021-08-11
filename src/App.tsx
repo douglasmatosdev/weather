@@ -64,23 +64,22 @@ const WeatherContainer = styled.main`
         font-family: sans-serif;
         box-sizing: border-box;
     }
-   
+
+    max-width: 700px;
+    margin: 0 auto;
+
     header {
-        /* padding: 16px 16px 54px 16px; */
-       
         display: flex;
         flex-direction: column;
 
         .main-title {
-            font-size: 54px;
+            width: 70%;
+            font-size: 50px;
             font-weight: 600;
             line-height: 62px;
             margin: 24px;
             color: #fff;
         }
-        
-        
-        
     }
 
     hr {

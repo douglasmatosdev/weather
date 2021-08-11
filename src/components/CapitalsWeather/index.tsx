@@ -62,6 +62,7 @@ const CapitalsWeatherContainer = styled.section`
                 .min-max {
                     margin-right: 16px;
                 }
+                margin-bottom: 10px;
             }
             li span {
                 font-size: 16px;
