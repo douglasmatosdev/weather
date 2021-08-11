@@ -1,14 +1,22 @@
-const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid='
-const API_KEY = 'db04f7f0492b01563ff78567693c5b79'
+import { ResponseConsult, ResponseConsultForecast } from '../types'
+
+const BASE_URL = 'https://api.openweathermap.org/data/2.5/'
+const API_KEY = process.env.API_KEY
 const AUTH = `appid=${API_KEY}`
+const BR_SETUP = 'units=metric&lang=pt_br'
 
 const url = {
-    byName: 'https://api.openweathermap.org/data/2.5/weather?q='
+    byName: `${BASE_URL}weather?q=`,
+    forecastByName: `${BASE_URL}forecast?q=`
 }
 
 const api = {
-    getByName: (name: string) => {
-        return fetch(`${url.byName}${name}&${AUTH}&units=metric&lang=pt_br`)
+    getByName: (name: string): Promise<ResponseConsult> => {
+        return fetch(`${url.byName}${name}&${AUTH}&${BR_SETUP}`)
+            .then(res => res && res.json())
+    },
+    getForecastByName: (name: string): Promise<ResponseConsultForecast> => {
+        return fetch(`${url.forecastByName}${name}&${AUTH}`)
             .then(res => res && res.json())
     }
 }
