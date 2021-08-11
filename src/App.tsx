@@ -1,5 +1,5 @@
 import React from 'react'
-import { WeatherContainer } from './styled'
+import styled from 'styled-components'
 import Search from './components/Search'
 
 import api from './services'
@@ -14,7 +14,10 @@ export default function App(): JSX.Element {
     const filterForecast = (obj: ResponseConsultForecast): ListForecast[] => {
         const temp: ListForecast[] = obj && obj?.list ? obj.list : []
 
-        return temp.filter(e => e.dt_txt.includes('12:00:00'))
+        const forecast = temp.filter(e => e.dt_txt.includes('12:00:00'))
+        forecast.pop()
+
+        return forecast
     }
 
     const getForecastCity = (name: string): void => {
@@ -30,7 +33,7 @@ export default function App(): JSX.Element {
         <WeatherContainer>
             <header>
                 <h1 className="main-title">Previsão do tempo</h1>
-                {data && <Card {...data} />}
+                {data && forecast && <Card {...data} forecast={forecast} />}
                 <Search
                     handlerClick={(name) => {
                         getCity(name)
@@ -46,3 +49,36 @@ export default function App(): JSX.Element {
         </WeatherContainer>
     )
 }
+
+const WeatherContainer = styled.main`
+    *,
+    & {
+        font-family: sans-serif;
+        box-sizing: border-box;
+    }
+   
+    header {
+        /* padding: 16px 16px 54px 16px; */
+       
+        display: flex;
+        flex-direction: column;
+
+        .main-title {
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 62px;
+            margin: 24px;
+            color: #fff;
+        }
+        
+        
+        
+    }
+
+    hr {
+        width: 100%;
+        display: inline-block;
+    }
+
+   
+`

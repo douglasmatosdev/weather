@@ -43,6 +43,9 @@ export default function Search(props: Props): JSX.Element {
 
 const InputContainer = styled.div`
     position: relative;
+    width: 90%;
+    margin: 0 auto;
+    
     input {
         width: 100%;
         height: 48px;

@@ -16,7 +16,7 @@ const api = {
             .then(res => res && res.json())
     },
     getForecastByName: (name: string): Promise<ResponseConsultForecast> => {
-        return fetch(`${url.forecastByName}${name}&${AUTH}`)
+        return fetch(`${url.forecastByName}${name}&${AUTH}&${BR_SETUP}`)
             .then(res => res && res.json())
     }
 }

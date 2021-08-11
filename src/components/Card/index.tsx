@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Main, Sys, Weather, Wind } from '../../types'
+import { IconContext } from 'react-icons'
+import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
+import { ListForecast, Main, Sys, Weather, Wind } from '../../types'
 
 interface Props {
     name: string
@@ -8,41 +10,61 @@ interface Props {
     weather: Weather
     wind: Wind
     sys: Sys
+    forecast: ListForecast[] | null
 }
 
-export default function Card({ name, main, weather, wind, sys }: Props): JSX.Element {
-
+export default function Card({ name, main, weather, wind, sys, forecast }: Props): JSX.Element {
+    console.log(forecast)
     return (
         <CardContainer>
             <div className="card__header">
                 <h3>{name || 'Rio de Janeiro'} - {sys?.country || 'BR'}</h3>
-                <h1>{main?.temp || 25}°C {weather && weather[0]?.description || 'Nublado'}</h1>
+                <h1>{main?.temp.toFixed(0) || 25}°C {weather && weather[0]?.description || 'Nublado'}</h1>
                 <div className="card__box">
                     <div className="card__box-column">
                         <div className="box__column-item">
-                            <span>{main?.temp_min || 15}°</span>
-                            <span>{main?.temp_min || 30}°</span>
+                            <span className="column__item-value value-icon">
+                                <IconContext.Provider value={{ size: '24px', color: 'orange', className: 'global-class-name' }}>
+                                    <BsArrowDown />
+                                </IconContext.Provider>
+                                <span>{main?.temp_min || 15}°</span>
+                            </span>
+                            <span className="column__item-value value-icon">
+                                <IconContext.Provider value={{ size: '24px', color: 'orange', className: 'global-class-name' }}>
+                                    <BsArrowUp />
+                                </IconContext.Provider>
+                                <span>{main?.temp_max || 30}°</span>
+                            </span>
                         </div>
                         <div className="box__column-item">
                             <span>Vento</span>
-                            <span>{wind?.speed || 16}km/h</span>
+                            <span className="column__item-value">{wind?.speed || 16}km/h</span>
                         </div>
                     </div>
                     <div className="card__box-column">
                         <div className="box__column-item">
                             <span>Sensação</span>
-                            <span>{main?.feels_like || 24}°</span>
+                            <span className="column__item-value">{main?.feels_like || 24}°</span>
                         </div>
                         <div className="box__column-item">
                             <span>Humidade</span>
-                            <span>{main?.humidity || 18}%</span>
+                            <span className="column__item-value">{main?.humidity || 18}%</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr />
             <div className="card__body">
-
+                {forecast?.map((e, i) => {
+                    return (
+                        <div key={i} className="body__day">
+                            <h3>Terça</h3>
+                            <div>
+                                <span>{e.main.temp_min.toFixed(0) || 15}°</span>
+                                <span>{e.main.temp_max.toFixed(0) || 26}°</span>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </CardContainer>
     )
@@ -50,11 +72,10 @@ export default function Card({ name, main, weather, wind, sys }: Props): JSX.Ele
 
 const CardContainer = styled.div`
     .card__header {
-
-        background-color: #fff;
-        width: 100%;
         padding: 16px;
-        margin-bottom: 16px;
+        background-color: #FDF2E4;
+        width: 100%;
+       
         
         &, span {
             font-size: 16px;
@@ -85,19 +106,62 @@ const CardContainer = styled.div`
             }
             .box__column-item {
                 
-                span:last-child {
-                    margin-left: 8px;
-                    font-weight: 600;
+                .column__item-value:not(.value-icon) {
+                   margin-left: 8px;
                 }
+                .column__item-value {
+                    font-weight: 600;
+
+                }
+                
             }
             .box__column-item:first-child {
                 margin-bottom: 24px;
-                
+                display: flex;
+                height: 24px;
+                .value-icon, .value-icon span {
+                    display: inline-block;
+                }
+                .value-icon {
+                    display: flex;
+                    align-items: center;
+                }
             }
         }
     }
 
     hr {
         background-color: #ec8a11;
+    }
+
+    .card__body {
+        padding: 16px;
+        margin-top: 1px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-around;
+        background-color: #FDF2E4;
+
+        .body__day {
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                font-weight: bolder;
+                font-size: 1.2em;
+                margin-bottom: 16px;
+            }
+
+            div {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            span {
+                font-weight: bolder;
+                font-size: 1em;
+                color: #ec8a11;
+            }
+        }
     }
 `

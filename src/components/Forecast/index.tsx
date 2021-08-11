@@ -54,5 +54,43 @@ export default function Forecast(props: Props): JSX.Element {
 }
 
 const ForecastContainer = styled.section`
+    padding: 24px;
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 32px;
+    color: #fff;
 
+    }
+
+    .capitais {
+        h5 {
+            font-size: 13px;
+            font-weight: 100;
+            margin: 24px 0px 16px 0px;
+        }
+        &, ul {
+            display: flex;
+        }
+        flex-wrap: wrap;
+        ul {
+            width: 100%;
+            /* border: 1px solid #000; */
+            flex-direction: column;
+
+            li {
+                padding: 8px 0px;
+
+                .min-max {
+                    margin-right: 16px;
+                }
+            }
+            li span {
+                font-size: 16px;
+                font-weight: 600;
+                
+                
+            }
+        }
+    }
 `
