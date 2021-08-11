@@ -83,6 +83,7 @@ const WeatherContainer = styled.main`
 
     hr {
         width: 100%;
+        margin-top: 24px;
         display: inline-block;
     }
 

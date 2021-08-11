@@ -30,7 +30,7 @@ export default function Card({ name, main, weather, wind, sys, forecast, close }
                 <h1>{main?.temp.toFixed(0) || 25}°C {weather && weather[0]?.description || 'Nublado'}</h1>
                 <div className="card__box">
                     <div className="card__box-column">
-                        <div className="box__column-item">
+                        <div className="box__column-item f-item">
                             <span className="column__item-value value-icon">
                                 <IconContext.Provider value={{ size: '24px', color: 'orange', className: 'global-class-name' }}>
                                     <BsArrowDown />
@@ -128,9 +128,11 @@ const CardContainer = styled.div`
                 }
                 
             }
+            .f-item {
+                margin-left: -8px;
+            }
             .box__column-item:first-child {
                 margin-bottom: 24px;
-                margin-left: -8px;
                 display: flex;
                 height: 24px;
                 .value-icon, .value-icon span {
