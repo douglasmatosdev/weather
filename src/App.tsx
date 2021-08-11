@@ -10,7 +10,11 @@ import Forecast from './components/Forecast'
 export default function App(): JSX.Element {
     const [data, setData] = React.useState<ResponseConsult | null>(null)
     const [forecast, setForecast] = React.useState<ListForecast[] | null>(null)
+    const [close, setClose] = React.useState(false)
 
+    const handlerClose = () => {
+        setClose(!close)
+    }
     const filterForecast = (obj: ResponseConsultForecast): ListForecast[] => {
         const temp: ListForecast[] = obj && obj?.list ? obj.list : []
 
@@ -33,11 +37,13 @@ export default function App(): JSX.Element {
         <WeatherContainer>
             <header>
                 <h1 className="main-title">Previsão do tempo</h1>
-                {data && forecast && <Card {...data} forecast={forecast} />}
+                {!close && data && forecast && <Card {...data} forecast={forecast} close={handlerClose} />}
                 <Search
+                    clear={close}
                     handlerClick={(name) => {
                         getCity(name)
                         getForecastCity(name)
+                        setClose(!close ? close : !close)
                     }}
                     placeholder="Insira aqui o nome da cidade"
                 />

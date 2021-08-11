@@ -8,11 +8,10 @@ interface Props {
     type?: string
     placeholder?: string
     handlerClick: (name: string) => void
+    clear: boolean
 }
 
-export default function Search(props: Props): JSX.Element {
-    const { name, type = 'text', placeholder, handlerClick } = props
-
+export default function Search({ name, type = 'text', placeholder, handlerClick, clear }: Props): JSX.Element {
     const [state, setState] = React.useState({ value: '' })
 
     return (
@@ -20,7 +19,7 @@ export default function Search(props: Props): JSX.Element {
             <input
                 name={name}
                 type={type}
-                value={state.value}
+                value={!clear ? state.value : ''}
                 placeholder={placeholder}
                 onChange={(event: any): void => {
                     setState({ ...state, value: event.target.value })

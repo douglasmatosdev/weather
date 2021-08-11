@@ -12,15 +12,16 @@ interface Props {
     wind: Wind
     sys: Sys
     forecast: ListForecast[] | null
+    close: () => void
 }
 
-export default function Card({ name, main, weather, wind, sys, forecast }: Props){
-    const [close, setClose] = React.useState(false)
+export default function Card({ name, main, weather, wind, sys, forecast, close }: Props): JSX.Element {
 
-    return !close && (
+
+    return (
         <CardContainer>
             <div className="card__header">
-                <div className="icon-close" onClick={() => setClose(!close)}>
+                <div className="icon-close" onClick={() => close()}>
                     <IconContext.Provider value={{ size: '24px', color: 'orange', className: 'global-class-name' }}>
                         <FaTimes />
                     </IconContext.Provider>
@@ -129,6 +130,7 @@ const CardContainer = styled.div`
             }
             .box__column-item:first-child {
                 margin-bottom: 24px;
+                margin-left: -8px;
                 display: flex;
                 height: 24px;
                 .value-icon, .value-icon span {
