@@ -8,7 +8,7 @@ export const WeatherContainer = styled.main`
     }
    
     header {
-        /* padding: 16px 16px 54px 16px; */
+        padding: 16px 16px 54px 16px;
        
         display: flex;
         flex-direction: column;
