@@ -50,7 +50,7 @@ type City = {
 export interface ResponseConsult {
     base: string
     clouds: Clouds
-    cod: number
+    cod: string
     coord: Coord
     dt: number
     id: number
@@ -63,12 +63,18 @@ export interface ResponseConsult {
     wind: Wind
 }
 
+export interface ResponseConsultGroupForecast {
+    cnt: number
+    list: ListForecast[]
+}
+
 export interface ListForecast {
     clouds: Clouds
     dt: number
     dt_txt: string
     main: Main & { grnd_level: number; sea_level: number; temp_kf: number; }
     pop: number
+    name: string
     sys: { prod: number }
     visibility: number
     weather: Weather

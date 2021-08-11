@@ -3,45 +3,47 @@ import styled from 'styled-components'
 import Search from './components/Search'
 
 import api from './services'
-import { ListForecast, ResponseConsult, ResponseConsultForecast } from './types'
+import { filterForecast, groupId, sortId } from './utils'
+import { ListForecast, ResponseConsult, ResponseConsultForecast, ResponseConsultGroupForecast } from './types'
 import Card from './components/Card'
-import Forecast from './components/Forecast'
+import CapitalsWeather from './components/CapitalsWeather'
 
 export default function App(): JSX.Element {
     const [data, setData] = React.useState<ResponseConsult | null>(null)
     const [forecast, setForecast] = React.useState<ListForecast[] | null>(null)
+    const [capitals, setCapitals] = React.useState<ListForecast[] | null>(null)
     const [close, setClose] = React.useState(false)
-
-    const handlerClose = () => {
-        setClose(!close)
-    }
-    const filterForecast = (obj: ResponseConsultForecast): ListForecast[] => {
-        const temp: ListForecast[] = obj && obj?.list ? obj.list : []
-
-        const forecast = temp.filter(e => e.dt_txt.includes('12:00:00'))
-        forecast.pop()
-
-        return forecast
-    }
 
     const getForecastCity = (name: string): void => {
         const response = api.getForecastByName(name)
-            .then(res => res.cod === '200' && setForecast(filterForecast(res)))
+            .then(res => res.cod == '200' && setForecast(filterForecast(res)))
     }
-    const getCity = (name: string): void => {
+    const getCityByName = (name: string): void => {
         const response = api.getByName(name)
-            .then(res => res.cod == 200 && setData(res))
+            .then(res => res.cod == '200' && setData(res))
     }
+
+    const getCityByGroupId = (groupId: number[]): void => {
+        const response = api.getByGroupId(groupId)
+            .then(res => res && res?.list && setCapitals(res?.list))
+    }
+
+    React.useEffect(() => {
+        if (groupId && groupId?.length) {
+            const group = sortId(groupId)
+            getCityByGroupId(group)
+        }
+    }, [groupId])
 
     return (
         <WeatherContainer>
             <header>
                 <h1 className="main-title">Previsão do tempo</h1>
-                {!close && data && forecast && <Card {...data} forecast={forecast} close={handlerClose} />}
+                {!close && data && forecast && <Card {...data} forecast={forecast} close={() => setClose(!close)} />}
                 <Search
                     clear={close}
                     handlerClick={(name) => {
-                        getCity(name)
+                        getCityByName(name)
                         getForecastCity(name)
                         setClose(!close ? close : !close)
                     }}
@@ -51,7 +53,7 @@ export default function App(): JSX.Element {
 
             <hr />
 
-            <Forecast />
+            {capitals && <CapitalsWeather capitals={capitals} />}
         </WeatherContainer>
     )
 }
