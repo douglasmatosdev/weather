@@ -35,6 +35,6 @@ Webpack dev-server
 
 ### Mobile
 <div>
-    <img align="left" src=".doc/mobile.png" >
-    <img align="right" src=".doc/mobile-consult.png" >
+    <img width="200px" align="left" src=".doc/mobile.png" >
+    <img width="200px" align="right" src=".doc/mobile-consult.png" >
 </div>
