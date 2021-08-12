@@ -5,6 +5,7 @@
   "repository": "https://github.com/douglasmatosdev/weather.git",
   "author": "douglasmatosdev <douglasmatosdev@gmail.com>",
   "license": "MIT",
+  "homepage": "https://weather-app-forecast.netlify.app/",
   "scripts": {
     "dev": "webpack --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
