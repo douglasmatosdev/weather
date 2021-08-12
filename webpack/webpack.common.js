@@ -8,7 +8,9 @@ module.exports = {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
     plugins: [
-        new Dotenv()
+        new Dotenv({
+            systemvars: true
+        })
     ],
     module: {
         rules: [
