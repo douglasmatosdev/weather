@@ -63,13 +63,11 @@ const CapitalsWeatherContainer = styled.section`
 
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            /* border: 1px solid #000; */
             width: 100%;
         }
         #capitals-columns {
             li {
                 padding: 8px 0px;
-                /* border: 1px solid #fff; */
                 margin-bottom: 10px;
 
                 .min-max {
@@ -102,6 +100,5 @@ const CapitalsWeatherContainer = styled.section`
     @media (min-width: 550px) {
         width: 70%;
         margin: 0 auto;
-        border: 1px solid #000;
     }
 `
