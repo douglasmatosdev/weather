@@ -11,12 +11,15 @@ export default function CapitalsWeather({ capitals }: Props): JSX.Element {
     return (
         <CapitalsWeatherContainer>
             <h2>Capitais</h2>
-            <div className="capitais">
-                <ul>
-                    <h5>Min Max</h5>
+            <div className="capitals">
+                <ul id="title-columns">
+                    <li>Min Max</li>
+                    <li>Min Max</li>
+                </ul>
+                <ul id="capitals-columns">
                     {capitals?.map((e, i) => {
                         return (
-                            <li key={i}>
+                            <li key={i} className={i <= 4 ? 'left-column' : 'right-column'}>
                                 <span className="min-max">
                                     {e?.main?.temp_min?.toFixed(0)}°
                                     {e?.main?.temp_max?.toFixed(0)}°
@@ -34,6 +37,10 @@ export default function CapitalsWeather({ capitals }: Props): JSX.Element {
 
 const CapitalsWeatherContainer = styled.section`
     padding: 24px;
+    margin: 0 auto;
+    width: 90%;
+
+  
     h2 {
         font-size: 32px;
         font-weight: 600;
@@ -41,35 +48,60 @@ const CapitalsWeatherContainer = styled.section`
         color: #fff;
     }
 
-    .capitais {
-        h5 {
+    .capitals {
+        display: flex;
+        flex-wrap: wrap;
+
+        #title-columns {
             font-size: 13px;
             font-weight: 100;
             margin: 24px 0px 16px 0px;
         }
-        &, ul {
-            display: flex;
-        }
-        flex-wrap: wrap;
-        ul {
-            width: 100%;
-            /* border: 1px solid #000; */
-            flex-direction: column;
 
+        #title-columns,
+        #capitals-columns {
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* border: 1px solid #000; */
+            width: 100%;
+        }
+        #capitals-columns {
             li {
                 padding: 8px 0px;
+                /* border: 1px solid #fff; */
+                margin-bottom: 10px;
 
                 .min-max {
                     margin-right: 16px;
                 }
-                margin-bottom: 10px;
             }
             li span {
                 font-size: 16px;
                 font-weight: 600;
-                
-                
             }
         }
+    }
+    @media (max-width: 500px) {
+        .capitals {
+            #title-columns {
+                li:last-child {
+                    display: none;
+                }
+            }
+            #capitals-columns {
+
+                .left-column,
+                .right-column {
+                    grid-column: 1 / span 5;
+                }
+            }
+        }
+       
+    }
+    @media (min-width: 550px) {
+        width: 70%;
+        margin: 0 auto;
+        border: 1px solid #000;
     }
 `

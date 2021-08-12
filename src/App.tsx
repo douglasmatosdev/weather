@@ -77,7 +77,7 @@ const WeatherContainer = styled.main`
             font-size: 50px;
             font-weight: 600;
             line-height: 62px;
-            margin: 24px;
+            margin: 24px 24px 32px 24px;
             color: #fff;
         }
     }
@@ -88,5 +88,20 @@ const WeatherContainer = styled.main`
         display: inline-block;
     }
 
-   
+    @media (min-width: 500px) {
+       .main-title {
+           text-align: center !important;
+           font-size: 4em !important;
+           width: 100% !important;
+           margin: 100px auto 32px !important;
+       }
+
+       hr {
+        width: 90%;
+        margin-top: 24px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+       }
+   }
 `

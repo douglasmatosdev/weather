@@ -33,7 +33,6 @@ export const filterForecast = (obj: ResponseConsultForecast): ListForecast[] => 
     const temp: ListForecast[] = obj && obj?.list ? obj.list : []
 
     const forecast = temp.filter(e => e.dt_txt.includes('12:00:00'))
-    forecast.pop()
 
     return forecast
 }

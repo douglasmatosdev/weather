@@ -17,6 +17,14 @@ interface Props {
 
 export default function Card({ name, main, weather, wind, sys, forecast, close }: Props): JSX.Element {
 
+    const getDayWeek = (date: string): string => {
+        const week = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+        const arr = date.split(' ')[0].split('-')
+        const test = new Date(parseInt(arr[0]), parseInt(arr[1]) - 1, parseInt(arr[2]));
+        const day = test.getDay();
+        
+        return week[day]
+    }
 
     return (
         <CardContainer>
@@ -64,8 +72,8 @@ export default function Card({ name, main, weather, wind, sys, forecast, close }
             <div className="card__body">
                 {forecast?.map((e, i) => {
                     return (
-                        <div key={i} className="body__day">
-                            <h3>Terça</h3>
+                        <div key={i} className={`body__day ${i == forecast.length-1 ? 'last-day' : ''}`}>
+                             <h3>{getDayWeek(e.dt_txt)}</h3>
                             <div>
                                 <span>{e.main.temp_min.toFixed(0) || 15}°</span>
                                 <span>{e.main.temp_max.toFixed(0) || 26}°</span>
@@ -79,6 +87,7 @@ export default function Card({ name, main, weather, wind, sys, forecast, close }
 }
 
 const CardContainer = styled.div`
+    margin: 0 auto;
     .card__header .icon-close {
         position: absolute;
         right: 24px;
@@ -170,7 +179,7 @@ const CardContainer = styled.div`
 
             div {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
             }
 
             span {
@@ -179,5 +188,16 @@ const CardContainer = styled.div`
                 color: #ec8a11;
             }
         }
+    }
+    @media(max-width: 500px) {
+        width: 100% !important;
+        .last-day {
+            display: none !important;
+        }
+    }
+
+    @media(min-width: 550px) {
+        width: 80% !important;
+
     }
 `

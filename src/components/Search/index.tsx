@@ -19,7 +19,7 @@ export default function Search({ name, type = 'text', placeholder, handlerClick,
             <input
                 name={name}
                 type={type}
-                value={!clear ? state.value : ''}
+                value={state.value}
                 placeholder={placeholder}
                 onChange={(event: any): void => {
                     setState({ ...state, value: event.target.value })
@@ -60,5 +60,10 @@ const InputContainer = styled.div`
         background: none;
         font-size: 24px;
         cursor: pointer;
+    }
+
+    @media (min-width: 500px) {
+        width: 80%;
+        margin: 0 auto;
     }
 `
