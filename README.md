@@ -34,7 +34,7 @@ Webpack dev-server
 
 
 ### Mobile
-<div>
+<div style="width: 500px; margin: 0 auto;">
     <img width="200px" align="left" src=".doc/mobile.png" >
     <img width="200px" align="right" src=".doc/mobile-consult.png" >
 </div>
