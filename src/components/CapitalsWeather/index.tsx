@@ -19,7 +19,7 @@ export default function CapitalsWeather({ capitals }: Props): JSX.Element {
                 <ul id="capitals-columns">
                     {capitals?.map((e, i) => {
                         return (
-                            <li key={i} className={i <= 4 ? 'left-column' : 'right-column'}>
+                            <li data-testid="columns" key={i} className={i <= 4 ? 'left-column' : 'right-column'}>
                                 <span className="min-max">
                                     {e?.main?.temp_min?.toFixed(0)}°
                                     {e?.main?.temp_max?.toFixed(0)}°

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should be rendered without crash 1`] = `
+<div>
+  <section
+    class="sc-bdnxRM bhqYwV"
+  >
+    <h2>
+      Capitais
+    </h2>
+    <div
+      class="capitals"
+    >
+      <ul
+        id="title-columns"
+      >
+        <li>
+          Min Max
+        </li>
+        <li>
+          Min Max
+        </li>
+      </ul>
+      <ul
+        id="capitals-columns"
+      />
+    </div>
+  </section>
+</div>
+`;
