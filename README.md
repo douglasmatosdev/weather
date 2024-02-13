@@ -30,11 +30,11 @@ Webpack dev-server
 
 
 ### Search in Desktop
-![Desktp](.doc/desktop-consult.png)
+![Desktp](doc/desktop-consult.png)
 
 
 ### Mobile
 <div style="width: 500px; margin: 0 auto;">
-    <img width="200px" align="left" src=".doc/mobile.png" >
-    <img width="200px" align="right" src=".doc/mobile-consult.png" >
+    <img width="200px" align="left" src="doc/mobile.png" >
+    <img width="200px" align="right" src="doc/mobile-consult.png" >
 </div>
